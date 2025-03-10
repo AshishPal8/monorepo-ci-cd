@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "week25-bms",
   "private": true,
   "scripts": {
     "build": "turbo run build",
