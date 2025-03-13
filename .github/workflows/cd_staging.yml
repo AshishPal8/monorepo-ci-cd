@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} &> ~/ssh_key
+          echo "${{secrets.SSH_PRIVATE_KEY}}" &> ~/ssh_key
           ssh -i ~/ssh_key ubuntu@65.0.104.99
           cd monorepo-ci-cd/ && git pull 
           pnpm install 
