@@ -1,0 +1,21 @@
+---
+name: Deploy on Staging
+on:
+  push:
+    branches:
+      - main
+jobs:
+  redeploy_everything:
+    runs-on: ubuntu-latest
+    name: Deploy the frontend to staging
+
+    steps:
+      - run: |
+          echo ${{secrets.SSH_PRIVATE_KEY}} &> ~/ssh_key
+          ssh -i ~/ssh_key ubuntu@65.0.104.99
+          cd monorepo-ci-cd/ && git pull 
+          pnpm install 
+          pnpm run build
+          pm2 restart http-server 
+          pm2 restart ws-server
+          pm2 restart fe-server
